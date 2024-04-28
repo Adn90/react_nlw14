@@ -182,9 +182,8 @@ export function App() {
 
 ### Valores customizados
 
-Basta passar a propriedade e no valor, colocar entre []
-
 ```tsx
+{/*Basta passar a propriedade e no valor, colocar entre []*/}
 <div className='h-[20px] bg-slate-700'></div>
 <div className='grid grid-cols-3 auto-rows-[250px]'></div>
 
@@ -196,7 +195,6 @@ Basta passar a propriedade e no valor, colocar entre []
 
 ```tsx
 {/* posição relativa */}
-{/* pointer-events-none - o elemento não passa mas a ter clique, no caso iria problemas ao tentar copiar texto na área do gradiente*/}
 <div className='rounded-md bg-slate-800 p-5 space-y-3 overflow-hidden relative pointer-events-none'>
   <span className='text-sm font-medium text-slate-300'>
     há 2 dias
@@ -206,6 +204,7 @@ Basta passar a propriedade e no valor, colocar entre []
   </p>
 
   {/* posição absoluta - seta as direções  = 0, mas em relação ao topo, quer metedade do graditente de baixo para cima, das cores from -> to */}
-  <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-white/0'></div>
+  {/* pointer-events-none - o elemento não passa mas a ter clique, no caso iria problemas ao tentar copiar texto na área do gradiente*/}
+  <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-white/0 pointer-events-none'></div>
 </div>
 ```
