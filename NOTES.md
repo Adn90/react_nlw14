@@ -208,3 +208,15 @@ export function App() {
   <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-white/0 pointer-events-none'></div>
 </div>
 ```
+
+```tsx
+// let btnClass = 'text-left rounded-md bg-slate-800 p-5 space-y-3 overflow-hidden relative hover:ring-2 hover:ring-slate-600 outline-none focus-visible:ring-2 focus-visible:ring-lime-400';
+  let btnBlockStyle = 'text-left rounded-md bg-slate-800 p-5 space-y-3 overflow-hidden relative';
+  let btnHoverStyle = 'hover:ring-2 hover:ring-slate-600';
+  // remover focus padrão do SO no browser, ao navegar com tab (outline-none) 
+  // diferente do focus, focus-visible só vai ter o focus ao naver por tab
+  let btnFocusStyle = 'outline-none focus-visible:ring-2 focus-visible:ring-lime-400';
+  return(
+      <button className={`${btnBlockStyle} ${btnHoverStyle} ${btnFocusStyle}`}></button>
+  );
+```
