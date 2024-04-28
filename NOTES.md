@@ -220,3 +220,20 @@ export function App() {
       <button className={`${btnBlockStyle} ${btnHoverStyle} ${btnFocusStyle}`}></button>
   );
 ```
+
+## Propriedades
+
+Tudo que é passado para um componente, com o objetivo de mudar comportamento/visual, é chamado de propriedade
+
+```tsx
+<img src="" alt="" /> // no react, src é uma prop, em html atributo
+// 
+import * as Dialog from '@radix-ui/react-dialog'; // cria um objeto chamado Dialog, que tem acesso as funções do import
+interface NoteCardProps {
+    note: {
+        date: Date;
+        content: string
+    }
+}
+export function NoteCard({ note }: NoteCardProps) {}
+```

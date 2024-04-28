@@ -11,6 +11,7 @@
 - [React](https://pt-br.react.dev/blog/2023/03/16/introducing-react-dev)
 - [Vite](https://vitejs.dev/)
 - [Tailwind](https://tailwindcss.com/)
+- [Radix](https://www.radix-ui.com/)
 
 
 <!-- ## Práticas adotadas
