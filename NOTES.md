@@ -221,6 +221,30 @@ export function App() {
   );
 ```
 
+```tsx
+// inset css - coloca em todas as direções top, bottom etc; nesse caso 0, para ocupar toda a tela
+<Dialog.Overlay className='inset-0 fixed'/>
+```
+
+- posicionar extamente no centro
+
+```tsx
+{/*
+  os elementos são posicionadas baseados no seu canto superior esquerdo
+  dê um espaçãmento a left e top de 50% para centralizar 
+  porém o elemento cresce para direita e para baixo, quebra a centralização
+*/}
+<Dialog.Content className='fixed left-1/2 top-1/2 w-[300px] h-[200px] bg-white'>
+{/*
+  utilizar um transform(translate) para centralizar ele a medida que cresce
+
+  -translate-x-1/2 - ande em P(-0.5, -0.5)
+*/}
+<Dialog.Content className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[300px] h-[200px] bg-white'>
+```
+
+
+
 ## Propriedades
 
 Tudo que é passado para um componente, com o objetivo de mudar comportamento/visual, é chamado de propriedade
@@ -236,4 +260,28 @@ interface NoteCardProps {
     }
 }
 export function NoteCard({ note }: NoteCardProps) {}
+```
+
+```tsx
+ return(
+    <Dialog.Root>
+      <Dialog.Trigger className={`${btnBlockStyle} ${btnHoverStyle} ${btnFocusStyle} ${btnFocusVisibleStyle}` }> {/*abrir modal*/}
+        <span className='text-sm font-medium text-slate-300'>
+          { note.date.toISOString() }
+        </span>
+        <p className='text-sm leading-6 text-slate-400'>
+          { note.content }
+        </p>
+        
+        <div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-white/0 pointer-events-none'></div>
+      </Dialog.Trigger>
+
+      {/*Envia o content para uma outra parte do layout, ao invés da posição literal (aqui, seria criado um outro elemento depois do trigger*/}
+      {/*Dialog.Portal envia o elemento para o body - é um modal e corretamente fica fora da div separada*/}
+      <Dialog.Portal> 
+        <Dialog.Overlay className='inset-0 fixed'/> {/* efeito de modal */}
+        <Dialog.Content>TESTE</Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>  
+  );
 ```
