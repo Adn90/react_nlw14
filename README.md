@@ -14,6 +14,7 @@
 - [Radix](https://www.radix-ui.com/)
 - [date-fns](https://date-fns.org/)
 - [Lucide React](https://lucide.dev/guide/packages/lucide-react)
+- [Sonner](https://sonner.emilkowal.ski/)
 
 
 <!-- ## Práticas adotadas

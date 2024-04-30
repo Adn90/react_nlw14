@@ -270,6 +270,12 @@ export function App() {
 </Dialog.Content>
 ```
 
+```tsx
+function handleSaveNote(form: FormEvent) {
+  form.preventDefault(); // evita comportamento padrão do form, é ao ser um submit, vá para outra ágina
+}
+```
+
 
 
 ## Propriedades
