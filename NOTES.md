@@ -318,3 +318,108 @@ export function NoteCard({ note }: NoteCardProps) {}
     </Dialog.Root>  
   );
 ```
+
+## Estados
+
+- Sempre que um estado é modificado, a função do componente é chamada
+
+```tsx
+// sempre que hover um setNotes, o html da tela é recalculado (renderezar)
+export function App() {
+  const [notes, setNotes] = useState([
+    { id: 1, date: new Date(), content: "Note 1" },
+    { id: 2, date: new Date(), content: "Note 2" },
+    { id: 3, date: new Date(), content: "Note 3" },
+  ]);
+
+  return (
+    <div className='mx-auto max-w-6xl my-12 space-y-6'>
+      <img src={logo} alt="NLW Expert" />
+
+      <form className='w-full'>
+        <input 
+          type="text" 
+          placeholder='Busque em suas notas... '
+          className='w-full bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder: text-slate-500'
+        />
+      </form>
+
+      <div className='h-px bg-slate-700'></div>
+      
+      <div className='grid grid-cols-3 gap-6 auto-rows-[250px]'>
+
+        <NewNoteCard />
+
+        { notes.map(note => { return <NoteCard note={note} /> }) }
+       
+      </div>
+
+    </div>
+  );
+}
+```
+
+### imutabilidade
+
+> Não se modifica as informações de um estado em React, se cria infos novas
+
+```tsx
+function onCreateNote(content: string) {
+  const newNote = {
+    id: Math.random(),
+    date: new Date(),
+    content
+  }
+
+  setNotes([newNote, ...notes]);
+}
+```
+
+### Listas
+
+- Todas as lista no React precisam ter uma chave de referência
+- resulta em:
+  - performance para remover/incluir
+- Sem uma key, é exibido o erro no console:
+  - Each child in a list should have a unique "key" prop.
+
+```tsx
+{ notes.map(note => { return <NoteCard key={note.id} note={note} /> }) }
+```
+
+## Comunicação entre componentes via função
+
+- melhor forma de um componente pai se relacionar com um filho
+- no exemplo, o componente filho muda o pai
+- lembra o output do Angular 2+
+
+```tsx
+// <NewNoteCard onNoteCreated={onNoteCreated} /> seria para o angular -->> <NewNoteCard (onNoteCreated)="onNoteCreated($event)" />
+// onNoteCreated vai retonar o conteúdo que foi digitado na nota e a função app.tsx de mesmo nome, vai montar nova nota no layout
+export function App() {
+  function onNoteCreated(content: string) {
+    const newNote = {
+      id: Math.random(),
+      date: new Date(),
+      content
+    }
+
+    setNotes([newNote, ...notes]);
+  }
+
+  return (
+    <div className='mx-auto max-w-6xl my-12 space-y-6'>
+      {/* ... */ }     
+      <div className='grid grid-cols-3 gap-6 auto-rows-[250px]'>
+
+        <NewNoteCard onNoteCreated={onNoteCreated} />
+
+        { notes.map(note => { return <NoteCard key={note.id} note={note} /> }) }
+       
+      </div>
+
+    </div>
+  );
+}
+
+```
