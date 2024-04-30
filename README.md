@@ -6,12 +6,14 @@
  <img src="https://img.shields.io/static/v1?label=Tipo&message=Tutorial&color=3AC324&labelColor=000000" alt="Tutorial" />
 </p>
 
-## Tecnologias
+## Tecnologias e libs
 
 - [React](https://pt-br.react.dev/blog/2023/03/16/introducing-react-dev)
 - [Vite](https://vitejs.dev/)
 - [Tailwind](https://tailwindcss.com/)
 - [Radix](https://www.radix-ui.com/)
+- [date-fns](https://date-fns.org/)
+- [Lucide React](https://lucide.dev/guide/packages/lucide-react)
 
 
 <!-- ## Práticas adotadas

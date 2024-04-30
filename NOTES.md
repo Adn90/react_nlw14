@@ -243,6 +243,33 @@ export function App() {
 <Dialog.Content className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[300px] h-[200px] bg-white'>
 ```
 
+```tsx
+// Bordas arredondadas
+// caso o elemento pai tenha bordas arredondads, mas o filho não, este acaba ficando por cima do pai, como o btn
+// é preciso colocar um overflow-hidden para colocar qualquer elemento interno que sobrescreva o pai
+<Dialog.Content className='fixed overflow-hidden left-1/2 ....'>
+  <button 
+    type="button"
+    className='w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-nome font-medium group'
+  >
+    Deseja <span className='text-red-400 group-hover:underline'>apagar essa nota?</span>
+  </button>
+</Dialog.Content>
+```
+
+```tsx
+// fazer style em um elemento específico, baseado em um seletor pai (algo que acontece no pai, mas só afeta tag específica)
+// bata utilizar o att 'group' no pai e depois colocar no filho group-style
+<Dialog.Content className='fixed overflow-hidden left-1/2 ....'>
+  <button 
+    type="button"
+    className='w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-nome font-medium group'
+  >
+    Deseja <span className='text-red-400 group-hover:underline'>apagar essa nota?</span>
+  </button>
+</Dialog.Content>
+```
+
 
 
 ## Propriedades
