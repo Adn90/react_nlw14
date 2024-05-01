@@ -276,8 +276,6 @@ function handleSaveNote(form: FormEvent) {
 }
 ```
 
-
-
 ## Propriedades
 
 Tudo que é passado para um componente, com o objetivo de mudar comportamento/visual, é chamado de propriedade
@@ -442,4 +440,57 @@ export function App() {
   );
 }
 
+```
+
+
+## Reconhecimento de fala no Browser
+
+
+```yaml
+# para o ts reconhecer as funções de speech-recognition
+npm install -D @types/dom-speech-recognition
+```
+
+```tsx
+let speechRecognition: SpeechRecognition | null = null; // acesso global para o btn de fechar mic
+
+
+function handleStartRecording() {
+    const isSpeechRecognitionAPIAvalible = 
+      'SpeechRecognition' in window ||'webkitSpeechRecognition' in window; // verifica se uma classe está dentro de window
+
+    if (!isSpeechRecognitionAPIAvalible) {
+      toast.info("Infelizmente seu navegador não suporta a API de gravação!");
+      return;
+    }
+
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    speechRecognition = new SpeechRecognitionAPI();
+    
+    speechRecognition.lang = 'pt-BR';
+    speechRecognition.continuous = true; // faz com que a gravação continue até o user quiser
+    speechRecognition.maxAlternatives = 1; // nª alternativas para uma palavra que a API achava que foi dita, em caso de não entender
+    speechRecognition.interimResults = true; // transcreve o texto enquanto fala
+
+    setIsRecording(true);
+    setShouldShowOnboarding(false);
+
+    speechRecognition.onresult = (event: SpeechRecognitionEvent) => {
+      // event.results é um iterator e não tem os métodos de um arry. Array.from(event.results) converte interator para arry
+      // reduce vai executar uma função para cada info do arry e se passa o valor inicial da função que se quer montar reduce((text, result) => {}, '')
+      const transcription = Array.from(event.results).reduce((text, result) => {
+        // vai atualizando o text e concat com cada input de voz e atualiza o textarea
+        return text.concat(result[0].transcript); // 1ª posição por causa do maxAlternatives = 1
+      }, '');
+
+      setNoteContent(transcription);
+    };
+
+    speechRecognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      toast.error(event.message);
+    }
+
+    speechRecognition.start();
+  }
 ```
