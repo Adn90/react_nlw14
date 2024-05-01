@@ -220,6 +220,20 @@ export function App() {
       <button className={`${btnBlockStyle} ${btnHoverStyle} ${btnFocusStyle}`}></button>
   );
 ```
+> responsividade
+
+```tsx
+{/*
+  px-5 padding em x, mas quando for tela md, não precisa (md:px-0)
+*/}
+<div className='mx-auto max-w-6xl my-12 space-y-6 px-5 md:px-0'>
+
+{/* grid-cols-1 -> 1 coluna para telas small
+    md:grid-cols-2 -> 2 cols para telas md
+    lg:grid-cols-3  
+*/}
+<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[250px]'>
+```
 
 ```tsx
 // inset css - coloca em todas as direções top, bottom etc; nesse caso 0, para ocupar toda a tela
