@@ -508,3 +508,31 @@ function handleStartRecording() {
     speechRecognition.start();
   }
 ```
+
+
+## Funções com parâmetro
+
+```tsx
+<button 
+  type="button"
+  className='w-full flex items-center justify-center gap-2 bg-slate-900 py-4 text-center text-sm text-slate-300 outline-nome font-medium hover:text-slate-100'
+  onClick={handleStopRecording} {/*passando a refência de uma função*/}
+></button>
+
+
+<button 
+  type="button"
+  className='w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-nome font-medium group'
+  onClick={onNoteDelete(note.id)} {/*executando uma função*/}
+></button>
+```
+
+A solução é passar uma função anônima, quando a finção precisar ser executada
+
+```tsx
+<button 
+  type="button"
+  className='w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-nome font-medium group'
+  onClick={() => onNoteDelete(note.id)} {/*executando uma função*/}
+></button>
+```

@@ -42,6 +42,15 @@ export function App() {
     ? notes.filter(note => note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
     : notes;
 
+  function onNoteDelete(id: string) {
+    
+    const notesArray = notes.filter(note => note.id != id);
+
+    setNotes(notesArray);
+
+    localStorage.setItem('notes', JSON.stringify(notesArray));
+  }
+
   return (
     <div className='mx-auto max-w-6xl my-12 space-y-6 px-5 md:px-0'>
       <img src={logo} alt="NLW Expert" />
@@ -61,7 +70,7 @@ export function App() {
 
         <NewNoteCard onNoteCreated={onNoteCreated} />
 
-        { filtredNotes.map(note => { return <NoteCard key={note.id} note={note} /> }) }
+        { filtredNotes.map(note => { return <NoteCard key={note.id} note={note} onNoteDelete={onNoteDelete} /> }) }
        
       </div>
 
