@@ -375,6 +375,26 @@ function onCreateNote(content: string) {
 }
 ```
 
+```tsx
+{/*
+  search é um estado e sempre que é modificado, recarrega componente
+  filtredNotes vai modificar o componente sempre que o onchange do search receber input
+  assim mostrando apenas notas na busca 
+*/}
+const [search, setSearch] = useState("");
+function handleSearch(event: ChangeEvent<HTMLInputElement>) {
+  const query = event.target.value;
+  setSearch(query);
+}
+
+const filtredNotes = search 
+  ? notes.filter(note => note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+  : notes;
+
+
+{ filtredNotes.map(note => { return <NoteCard key={note.id} note={note} /> }) }
+```
+
 ### Listas
 
 - Todas as lista no React precisam ter uma chave de referência

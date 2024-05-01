@@ -25,9 +25,28 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   function handleSaveNote(form: FormEvent) {
     form.preventDefault();
 
+    if (isNotValidateNote(noteContent)) {
+      return;
+    }
+
     onNoteCreated(noteContent);
 
     toast.success("Nota criada com sucesso!");
+
+    resetShowOnboarding();
+  }
+
+  function isNotValidateNote(noteContent: string): boolean {
+    if (!noteContent) {
+      toast.warning("A nota está vazia!");
+      return true;
+    }
+    return false;
+  }
+
+  function resetShowOnboarding() {
+    setShouldShowOnboarding(true);
+    setNoteContent("");
   }
 
   const addNoteBtn = "font-medium text-lime-400 hover:underline";
@@ -47,7 +66,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
         <Dialog.Content 
           className='fixed overflow-hidden left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  max-w-[640px] w-full h-[60vh] bg-slate-700 rounded-md flex flex-col outline-none'
         >
-          <Dialog.Close className='absolute right-0 top-0 bg-slate-800 p-1.5 text-slate-400 hover:text-slate-100'>
+          <Dialog.Close className='absolute right-0 top-0 bg-slate-800 p-1.5 text-slate-400 hover:text-slate-100' onClick={resetShowOnboarding}>
             <X className='size-5'/>
           </Dialog.Close>
 
@@ -69,6 +88,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                     autoFocus
                     className='text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none'
                     onChange={handleContentChange}
+                    value={noteContent}
                   /> 
                 )
               }
